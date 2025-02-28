@@ -1,0 +1,352 @@
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+  margin: 0;
+  padding: 20px;
+  text-align: center;
+}
+
+h1, h2 {
+  color: #222;
+}
+
+/* Header and Navigation */
+header {
+  background-color: #2d3a3d;
+  padding: 15px 20px;
+  color: white;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+
+header h1 {
+  color: white;
+  margin: 0;
+}
+
+.header-actions {
+  display: flex;
+  gap: 10px;
+}
+
+#main-logout-btn, #main-cart-btn {
+  background-color: #f44336;
+  color: white;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#main-cart-btn {
+  background-color: #4CAF50;
+  position: relative;
+}
+
+#cart-count {
+  background-color: white;
+  color: #4CAF50;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 0.8rem;
+  position: relative;
+  margin-left: 5px;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+nav ul li {
+  display: inline;
+  margin: 0 15px;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+/* Login & Registration Pages */
+.form-container {
+  width: 350px;
+  margin: 100px auto;
+  padding: 25px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.form-container h2 {
+  margin-bottom: 15px;
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+button {
+  cursor: pointer;
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+button:focus {
+  outline: 3px solid #4CAF50;
+}
+
+/* Tab Navigation */
+.tabs {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.tabs button {
+  padding: 10px
+}
+
+.tabs button {
+  padding: 10px 20px;
+  margin: 0 5px;
+  background-color: #f1f1f1;
+  color: #333;
+  border: none;
+  border-radius: 5px 5px 0 0;
+  cursor: pointer;
+}
+
+.tabs button.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.tab-content {
+  display: none;
+  padding: 20px;
+  background-color: white;
+  border-radius: 0 0 8px 8px;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+/* Restaurant List */
+.restaurant-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  margin-top: 20px;
+  justify-content: center;
+}
+
+.restaurant {
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+  padding: 15px;
+}
+
+.restaurant:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+.restaurant img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.restaurant h3 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #222;
+  margin: 5px 0;
+}
+
+.restaurant p {
+  font-size: 0.9rem;
+  color: #666;
+  margin: 5px 0;
+}
+
+/* Restaurant Page */
+#restaurant-page {
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+#back-to-restaurants-btn {
+  background-color: #28587B;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.menu-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.menu-item p {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.menu-item button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Address Management */
+.add-address-container {
+  display: flex;
+  margin-bottom: 15px;
+}
+
+.add-address-container input {
+  flex: 1;
+  margin-right: 10px;
+}
+
+#address-list {
+  list-style: none;
+  padding: 0;
+  text-align: left;
+}
+
+#address-list li {
+  background-color: #f9f9f9;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 5px;
+}
+
+#map {
+  width: 100%;
+  height: 300px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+}
+
+/* Cart Modal */
+.cart-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.cart-content {
+  position: relative;
+  background-color: white;
+  margin: 15% auto;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 500px;
+  width: 80%;
+}
+
+#cart-list {
+  list-style: none;
+  padding: 0;
+  text-align: left;
+}
+
+#cart-list li {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+#cart-total {
+  font-weight: bold;
+  text-align: right;
+  margin-top: 15px;
+}
+
+/* Footer */
+footer {
+  margin-top: 50px;
+  padding: 15px;
+  background: #28587B;
+  color: white;
+  font-size: 0.9rem;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .restaurant-list {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+  
+  .tabs {
+    flex-direction: column;
+  }
+  
+  .tabs button {
+    margin: 5px 0;
+    border-radius: 5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .form-container {
+    width: 90%;
+    margin: 50px auto;
+  }
+  
+  #restaurant-page {
+    padding: 10px;
+  }
+}
+

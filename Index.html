@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Food Application</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCB286O5rJZc4vKGvPaF-HJZf5ceKztDDA&libraries=places" async defer></script>
+</head>
+<body>
+<!-- Login Page -->
+<div id="login-page">
+  <h2>Login</h2>
+  <form id="login-form" onsubmit="loginUser(event)">
+    <div class="form-container">
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" required>
+
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" required>
+
+      <button type="button" id="signup-btn">Sign Up</button>
+      <button type="submit">Login</button>
+    </div>
+  </form>
+</div>
+
+<!-- Registration Page -->
+<div id="registration-page" class="form-container" style="display:none;">
+  <h2>Register</h2>
+  <form id="registration-form" onsubmit="event.preventDefault(); registerUser();">
+    <div class="form-container">
+      <label for="reg-username">Username</label>
+      <input type="text" id="reg-username" name="username" required>
+
+      <label for="reg-password">Password</label>
+      <input type="password" id="reg-password" name="password" required>
+
+      <label for="reg-email">Email</label>
+      <input type="email" id="reg-email" name="email" required>
+
+      <button type="submit">Register</button>
+    </div>
+  </form>
+</div>
+
+<!-- User Dashboard -->
+<div id="user-dashboard" style="display:none;">
+  <header>
+    <h1>Food Application</h1>
+    <nav>
+      <ul id="restaurant-nav">
+        <!-- Restaurants will be dynamically added here -->
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Tab navigation -->
+  <div class="tabs">
+    <button id="restaurants-tab" class="active" onclick="showTab('restaurants')">Restaurants</button>
+    <button id="addresses-tab" onclick="showTab('addresses')">Manage Addresses</button>
+  </div>
+
+  <!-- Restaurant Listings -->
+  <section id="restaurants" class="tab-content active">
+    <h2>Available Restaurants</h2>
+    <input type="text" id="search-bar" placeholder="Search restaurants...">
+    <div class="restaurant-list" id="restaurant-list"></div>
+  </section>
+
+  <!-- Address Management -->
+  <section id="addresses" class="tab-content">
+    <h2>Manage Addresses</h2>
+    <form id="address-form" onsubmit="event.preventDefault(); addAddress();">
+      <div class="add-address-container">
+        <input type="text" id="address" placeholder="Enter your address" required>
+        <button id="add-address-btn" class="button-85" role="button">Add Address</button>
+      </div>
+      <div id="map" style="height: 300px; width: 100%;"></div>
+    </form>
+    <ul id="address-list"></ul>
+  </section>
+</div>
+
+<footer>
+  <p>&copy; 2025 Food Application</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

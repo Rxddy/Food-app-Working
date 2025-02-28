@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Restaurant</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Restaurant page -->
+  <div id="restaurant-page">
+    <button id="back-to-restaurants-btn">Back to Restaurants</button>
+    <h2 id="restaurant-name">Restaurant Name</h2>
+    <div id="menu-items"></div>
+    <button id="cart-btn" onclick="viewCart()">View Cart</button>
+    <button id="logout-btn" onclick="logoutUser()">Logout</button>
+  </div>
+
+  <!-- Cart Modal -->
+  <div id="cart-modal" class="cart-modal" style="display: none;">
+    <div class="cart-content">
+      <h3>Your Cart</h3>
+      <ul id="cart-list"></ul>
+      <p id="cart-total">Total: $0.00</p>
+      <button onclick="closeCart()">Close</button>
+    </div>
+  </div>
+  
+  <footer>
+    <p>&copy; 2025 Food Application</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
