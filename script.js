@@ -432,7 +432,7 @@ function initMap() {
     // Update map
     if (place.geometry.viewport) {
       map.fitBounds(place.geometry.viewport);
-  } else {
+    } else {
       map.setCenter(place.geometry.location);
       map.setZoom(17);
     }
@@ -778,7 +778,7 @@ function showTab(tabName) {
       if (typeof google !== 'undefined') {
         setTimeout(initMap, 100); // Small delay to ensure the tab is visible
       }
-      loadAddresses();
+    loadAddresses();
     } else if (tabName === 'orders') {
       // Show all orders by default
       filterOrders('all');
@@ -812,9 +812,9 @@ async function loginUser(event) {
     
     // Load demo data
     loadSavedData();
-    return;
-  }
-  
+      return;
+    }
+    
   // Original login code for non-GitHub Pages environment
   try {
     const response = await fetch('/api/login', {
@@ -1414,7 +1414,7 @@ function closeCart() {
 
 function showCheckout() {
   // Close the cart modal first
-  closeCart();
+    closeCart();
   
   // Get the checkout modal
   const checkoutModal = document.getElementById('checkout-modal');
@@ -1463,10 +1463,10 @@ function showCheckout() {
             <div class="checkout-item">
               <span>${item.itemName}</span>
               <span>$${item.price.toFixed(2)}</span>
-            </div>
+        </div>
           `;
         }).join('')}
-      </div>
+        </div>
     `;
   });
   
@@ -1571,9 +1571,9 @@ function processOrder() {
         <p>Your order #${order.id} has been confirmed.</p>
         <p>Estimated delivery: ${new Date(order.estimatedDelivery).toLocaleTimeString()}</p>
         <button class="done-btn" onclick="closeCheckout(); showTab('orders');">View Orders</button>
-      </div>
-    `;
-    
+    </div>
+  `;
+  
     if (isGitHubPages) {
       console.log('GitHub Pages demo: Order processed successfully', order);
     } else {
@@ -1801,7 +1801,7 @@ function loadSavedData() {
   const savedOrders = localStorage.getItem('orders');
   if (savedOrders) {
     orders = JSON.parse(savedOrders);
-  } else {
+    } else {
     // For GitHub Pages demo, create some sample orders
     if (isGitHubPages) {
       orders = [
