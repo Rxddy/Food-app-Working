@@ -21,7 +21,7 @@
   "bugs": {
     "url": "https://github.com/Rxddy/Food-app-Working/issues"
   },
-  "homepage": "https://rxddy.github.io/Food-app-Working",
+  "homepage": "https://rxddy.github.io/Food-app-Working/",
   "dependencies": {
     "bcryptjs": "^3.0.2",
     "body-parser": "^1.20.3",
