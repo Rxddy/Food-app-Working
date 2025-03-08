@@ -1,47 +1,59 @@
-// Load environment variables from .env file
-try {
-  const dotenv = require('dotenv');
-  const result = dotenv.config();
-  if (result.error) {
-    console.warn('Error loading .env file. Using default or environment values.');
-  }
-} catch (error) {
-  console.warn('dotenv module not found. Using default or environment values.');
+// Configuration management for the application
+// This file loads environment variables and provides configuration to the app
+
+// Check if we're running in a browser environment
+const isBrowser = typeof window !== 'undefined';
+
+// Configuration for server-side (Node.js)
+if (!isBrowser) {
+  // Load environment variables from .env file in Node.js environment
+  require('dotenv').config();
 }
 
-// Export configuration variables
+// Create a configuration object with defaults
 const config = {
-  // Google Maps API Key
-  googleMapsApiKey: process.env.GOOGLE_MAPS_API_KEY || '',
+  // API keys and secrets
+  googleMapsApiKey: isBrowser 
+    ? window.GOOGLE_MAPS_API_KEY || 'YOUR_GOOGLE_MAPS_API_KEY' 
+    : process.env.GOOGLE_MAPS_API_KEY || 'YOUR_GOOGLE_MAPS_API_KEY',
   
-  // JWT Secret (for future backend implementation)
-  jwtSecret: process.env.JWT_SECRET_KEY || 'default_jwt_secret',
+  jwtSecret: isBrowser 
+    ? 'JWT_SECRET_NOT_USED_IN_BROWSER' 
+    : process.env.JWT_SECRET || 'default_jwt_secret_for_development',
   
-  // Database config (for future implementation)
-  database: {
+  // Database configuration
+  dbConfig: {
     host: process.env.DB_HOST || 'localhost',
-    user: process.env.DB_USER || 'root',
-    password: process.env.DB_PASSWORD || '',
-    name: process.env.DB_NAME || 'food_app_db'
+    port: process.env.DB_PORT || 5432,
+    database: process.env.DB_NAME || 'food_app',
+    user: process.env.DB_USER || 'postgres',
+    password: process.env.DB_PASSWORD || 'password',
   },
   
-  // Other API keys (add as needed)
-  // stripeApiKey: process.env.STRIPE_API_KEY || '',
-  // twilioApiKey: process.env.TWILIO_API_KEY || '',
+  // Server configuration
+  serverPort: process.env.PORT || 3000,
+  
+  // Application settings
+  appName: 'Food Application',
+  isProduction: process.env.NODE_ENV === 'production',
+  
+  // GitHub Pages detection
+  isGitHubPages: isBrowser && window.location.hostname.includes('github.io'),
 };
 
-// For browser usage, create a safe config object with only public keys
-const publicConfig = {
-  googleMapsApiKey: config.googleMapsApiKey,
-  // Add other public keys as needed
-};
-
-// Make config available globally for browser scripts
-if (typeof window !== 'undefined') {
-  window.APP_CONFIG = publicConfig;
-}
-
-// For Node.js usage
-if (typeof module !== 'undefined' && module.exports) {
+// For browser environment, create a global config object
+if (isBrowser) {
+  // Create a public subset of config that's safe to expose to the browser
+  window.APP_CONFIG = {
+    googleMapsApiKey: config.googleMapsApiKey,
+    appName: config.appName,
+    isProduction: config.isProduction,
+    isGitHubPages: config.isGitHubPages,
+    apiBaseUrl: config.isGitHubPages 
+      ? 'https://your-api-server.com' // Replace with your actual API server if you have one
+      : 'http://localhost:3000'
+  };
+} else {
+  // Export the config for Node.js
   module.exports = config;
 } 

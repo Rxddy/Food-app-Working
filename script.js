@@ -11,6 +11,9 @@ let promoCodes = {
   'FREESHIP': { discount: 0, freeShipping: true, description: 'Free shipping on your order' }
 };
 
+// Check if we're running on GitHub Pages
+const isGitHubPages = window.APP_CONFIG && window.APP_CONFIG.isGitHubPages;
+
 // Dark mode map style for Google Maps
 const DARK_MAP_STYLE = [
   { elementType: "geometry", stylers: [{ color: "#242f3e" }] },
@@ -783,44 +786,57 @@ function showTab(tabName) {
   }
 }
 
+// Modified loginUser function for GitHub Pages compatibility
 async function loginUser(event) {
-  event.preventDefault();
+  if (event) event.preventDefault();
   
-  const username = document.getElementById("username").value.trim();
-  const password = document.getElementById("password").value.trim();
+  const username = document.getElementById('username').value;
+  const password = document.getElementById('password').value;
   
-  // Basic validation
   if (!username || !password) {
     alert('Please enter both username and password');
     return;
   }
   
+  if (isGitHubPages) {
+    // For GitHub Pages demo, use mock login
+    console.log('GitHub Pages demo: Using mock login');
+    
+    // Set a demo user
+    localStorage.setItem('userToken', 'demo-token');
+    localStorage.setItem('userEmail', username + '@example.com');
+    
+    // Show dashboard
+    document.getElementById('login-page').style.display = 'none';
+    document.getElementById('user-dashboard').style.display = 'block';
+    
+    // Load demo data
+    loadSavedData();
+    return;
+  }
+  
+  // Original login code for non-GitHub Pages environment
   try {
-    // Get users from localStorage
-    const users = JSON.parse(localStorage.getItem("users")) || [];
+    const response = await fetch('/api/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ username, password }),
+    });
     
-    // Find user
-    const user = users.find(u => u.username === username && u.password === password);
+    const data = await response.json();
     
-    if (user) {
-      // Store login state
-      localStorage.setItem("isLoggedIn", "true");
-      localStorage.setItem("currentUser", JSON.stringify({
-        username: user.username,
-        email: user.email
-      }));
+    if (response.ok) {
+      localStorage.setItem('userToken', data.token);
+      localStorage.setItem('userEmail', data.email);
       
-      // Show dashboard
-      document.getElementById("login-page").style.display = "none";
-      document.getElementById("user-dashboard").style.display = "block";
+      document.getElementById('login-page').style.display = 'none';
+      document.getElementById('user-dashboard').style.display = 'block';
       
-      // Initialize dashboard
-      showRestaurants();
-      updateCartIndicator();
-      loadAddresses();
-      showTab('restaurants');
+      loadSavedData();
     } else {
-      alert('Invalid username or password');
+      alert(data.message || 'Login failed. Please check your credentials.');
     }
   } catch (error) {
     console.error('Login error:', error);
@@ -828,41 +844,52 @@ async function loginUser(event) {
   }
 }
 
+// Modified registerUser function for GitHub Pages compatibility
 async function registerUser() {
-  const username = document.getElementById("reg-username").value.trim();
-  const password = document.getElementById("reg-password").value.trim();
-  const email = document.getElementById("reg-email").value.trim();
+  const username = document.getElementById('reg-username').value;
+  const email = document.getElementById('reg-email').value;
+  const password = document.getElementById('reg-password').value;
   
-  // Basic validation
-  if (!username || !password || !email) {
+  if (!username || !email || !password) {
     alert('Please fill in all fields');
     return;
   }
   
+  if (isGitHubPages) {
+    // For GitHub Pages demo, use mock registration
+    console.log('GitHub Pages demo: Using mock registration');
+    
+    // Set a demo user
+    localStorage.setItem('userToken', 'demo-token');
+    localStorage.setItem('userEmail', email);
+    
+    // Show dashboard
+    document.getElementById('registration-page').style.display = 'none';
+    document.getElementById('user-dashboard').style.display = 'block';
+    
+    // Load demo data
+    loadSavedData();
+    return;
+  }
+  
+  // Original registration code for non-GitHub Pages environment
   try {
-    // Get existing users or initialize empty array
-    const users = JSON.parse(localStorage.getItem("users")) || [];
+    const response = await fetch('/api/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ username, email, password }),
+    });
     
-    // Check if username already exists
-    if (users.some(user => user.username === username)) {
-      alert('Username already exists. Please choose another one.');
-      return;
-    }
+    const data = await response.json();
     
-    // Create new user object
-    const newUser = {
-      username,
-      password,
-      email,
-      createdAt: new Date().toISOString()
-    };
-    
-    // Add user to array and save to localStorage
-    users.push(newUser);
-    localStorage.setItem("users", JSON.stringify(users));
-    
-    alert('Registration successful! Please login.');
+    if (response.ok) {
+      alert('Registration successful! Please log in.');
       showLogin();
+    } else {
+      alert(data.message || 'Registration failed. Please try again.');
+    }
   } catch (error) {
     console.error('Registration error:', error);
     alert('An error occurred during registration. Please try again.');
@@ -1476,51 +1503,92 @@ function closeCheckout() {
   checkoutModal.style.display = 'none';
 }
 
+// Modified processOrder function for GitHub Pages compatibility
 function processOrder() {
-  // Get the checkout modal
-  const checkoutModal = document.getElementById('checkout-modal');
+  const paymentMethod = document.querySelector('input[name="payment"]:checked').value;
+  const instructions = document.getElementById('order-instructions').value;
   
-  // Hide the checkout content
-  const checkoutContent = checkoutModal.querySelector('.checkout-content');
-  checkoutContent.innerHTML = `
+  if (!selectedAddress) {
+    alert('Please select a delivery address');
+    return;
+  }
+  
+  if (paymentMethod === 'card') {
+    const cardNumber = document.querySelector('.card-input').value;
+    const cardExpiry = document.querySelector('.card-input.small').value;
+    const cardCvv = document.querySelectorAll('.card-input.small')[1].value;
+    
+    if (!cardNumber || !cardExpiry || !cardCvv) {
+      alert('Please enter all card details');
+      return;
+    }
+  }
+  
+  // Show processing state
+  const checkoutBody = document.querySelector('.checkout-body');
+  checkoutBody.innerHTML = `
     <div class="order-processing">
       <div class="loading-spinner"></div>
-      <h3>Processing your order...</h3>
+      <p>Processing your order...</p>
     </div>
   `;
   
-  // Simulate processing time
+  // Simulate processing delay
   setTimeout(() => {
-    // Create a new order
-    const newOrder = {
-      id: Date.now(),
-      items: [...cart],
-      total: cart.reduce((sum, item) => sum + item.price, 0) * 1.08, // Including tax
+    // Create order object
+    const orderItems = Object.values(cart).flat();
+    const orderTotal = calculateTotal();
+    
+    const order = {
+      id: 'ORD' + Date.now(),
+      items: orderItems,
+      total: orderTotal,
+      address: selectedAddress,
+      paymentMethod: paymentMethod,
+      instructions: instructions,
       status: 'confirmed',
-      date: new Date().toISOString(),
-      address: addresses[selectedAddress] || 'No address provided'
+      timestamp: new Date().toISOString(),
+      estimatedDelivery: new Date(Date.now() + 30 * 60000).toISOString() // 30 minutes from now
     };
     
-    // Add to orders
-    orders.push(newOrder);
+    // Add to orders array
+    if (!orders) orders = [];
+    orders.push(order);
     
-    // Save orders to localStorage
+    // Save to localStorage
     localStorage.setItem('orders', JSON.stringify(orders));
     
     // Clear cart
-    cart = [];
+    cart = {};
     localStorage.setItem('cartItems', JSON.stringify(cart));
     updateCartIndicator();
     
     // Show success message
-    checkoutContent.innerHTML = `
+    checkoutBody.innerHTML = `
       <div class="order-success">
         <div class="success-icon">✓</div>
         <h3>Order Placed Successfully!</h3>
-        <p>Your order has been confirmed and will be delivered soon.</p>
-        <button class="done-btn" onclick="closeCheckout()">Done</button>
+        <p>Your order #${order.id} has been confirmed.</p>
+        <p>Estimated delivery: ${new Date(order.estimatedDelivery).toLocaleTimeString()}</p>
+        <button class="done-btn" onclick="closeCheckout(); showTab('orders');">View Orders</button>
       </div>
     `;
+    
+    if (isGitHubPages) {
+      console.log('GitHub Pages demo: Order processed successfully', order);
+    } else {
+      // In a real app, send to server
+      fetch('/api/orders', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('userToken')}`
+        },
+        body: JSON.stringify(order)
+      }).catch(error => {
+        console.error('Error saving order to server:', error);
+      });
+    }
   }, 2000);
 }
 
@@ -1715,12 +1783,6 @@ function createOrderCard(order) {
 
 // Load saved data from localStorage
 function loadSavedData() {
-  // Load user data
-  const savedUser = localStorage.getItem('currentUser');
-  if (savedUser) {
-    currentUser = JSON.parse(savedUser);
-  }
-  
   // Load cart items
   const savedCart = localStorage.getItem('cartItems');
   if (savedCart) {
@@ -1732,25 +1794,82 @@ function loadSavedData() {
   const savedAddresses = localStorage.getItem('addresses');
   if (savedAddresses) {
     addresses = JSON.parse(savedAddresses);
-  }
-  
-  // Load selected address
-  const savedSelectedAddress = localStorage.getItem('selectedAddress');
-  if (savedSelectedAddress) {
-    selectedAddress = JSON.parse(savedSelectedAddress);
-    updateSelectedAddressDisplay();
-  }
-  
-  // Load favorites
-  const savedFavorites = localStorage.getItem('favorites');
-  if (savedFavorites) {
-    favorites = JSON.parse(savedFavorites);
+    loadAddresses();
   }
   
   // Load orders
   const savedOrders = localStorage.getItem('orders');
   if (savedOrders) {
     orders = JSON.parse(savedOrders);
+  } else {
+    // For GitHub Pages demo, create some sample orders
+    if (isGitHubPages) {
+      orders = [
+        {
+          id: 'ORD123456',
+          items: [
+            { name: 'Cheeseburger', price: 8.99, restaurant: 'Burger Palace' },
+            { name: 'Fries', price: 3.99, restaurant: 'Burger Palace' }
+          ],
+          total: 12.98,
+          address: '123 Main St, Anytown, USA',
+          paymentMethod: 'card',
+          status: 'delivered',
+          timestamp: new Date(Date.now() - 86400000).toISOString(), // 1 day ago
+          estimatedDelivery: new Date(Date.now() - 84600000).toISOString()
+        },
+        {
+          id: 'ORD789012',
+          items: [
+            { name: 'Pepperoni Pizza', price: 14.99, restaurant: 'Pizza Heaven' }
+          ],
+          total: 14.99,
+          address: '123 Main St, Anytown, USA',
+          paymentMethod: 'cash',
+          status: 'preparing',
+          timestamp: new Date().toISOString(),
+          estimatedDelivery: new Date(Date.now() + 25 * 60000).toISOString() // 25 minutes from now
+        }
+      ];
+      localStorage.setItem('orders', JSON.stringify(orders));
+    } else {
+      orders = [];
+    }
+  }
+  
+  // Load favorites
+  const savedFavorites = localStorage.getItem('favorites');
+  if (savedFavorites) {
+    favorites = JSON.parse(savedFavorites);
+  } else if (isGitHubPages) {
+    // For GitHub Pages demo, set some sample favorites
+    favorites = [0, 2]; // Favorite the first and third restaurants
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+  }
+  
+  // Set selected address
+  const savedSelectedAddress = localStorage.getItem('selectedAddress');
+  if (savedSelectedAddress) {
+    selectedAddress = savedSelectedAddress;
+    updateSelectedAddressDisplay();
+  } else if (addresses && addresses.length > 0) {
+    selectedAddress = addresses[0];
+    updateSelectedAddressDisplay();
+  } else if (isGitHubPages) {
+    // For GitHub Pages demo, set a sample address
+    selectedAddress = '123 Main St, Anytown, USA';
+    addresses = [selectedAddress];
+    localStorage.setItem('addresses', JSON.stringify(addresses));
+    updateSelectedAddressDisplay();
+    loadAddresses();
+  }
+  
+  // Display restaurants
+  displayRestaurants();
+  
+  // Display orders
+  if (document.getElementById('orders')) {
+    displayOrders('all');
   }
 }
 
