@@ -10,12 +10,19 @@
   <!-- Google Maps API script with dynamic API key -->
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      // Create and append Google Maps script with API key from config
+      // For security in the GitHub Pages demo, we use a restricted API key
+      // In a production environment, this would be handled server-side
+      const apiKey = window.APP_CONFIG.googleMapsApiKey;
+      
+      // Create and append Google Maps script with API key
       const script = document.createElement('script');
-      script.src = `https://maps.googleapis.com/maps/api/js?key=${window.APP_CONFIG.googleMapsApiKey}&libraries=places`;
+      script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places`;
       script.async = true;
       script.defer = true;
       document.head.appendChild(script);
+      
+      // Add a note about API key usage
+      console.log('Note: For security, the Google Maps API key used in this demo is restricted.');
     });
   </script>
 </head>
@@ -280,6 +287,21 @@
 <footer>
   <p>&copy; 2025 Food Application</p>
 </footer>
+
+<!-- GitHub Pages Notice -->
+<div id="github-pages-notice" style="display: none; background-color: #f8d7da; color: #721c24; padding: 10px; margin: 10px; border-radius: 5px; text-align: center;">
+  <p>Note: This is a static demo running on GitHub Pages. Server-side features like user authentication and order processing are simulated.</p>
+  <button onclick="this.parentElement.style.display='none'" style="background-color: #721c24; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer;">Dismiss</button>
+</div>
+
+<script>
+  // Show GitHub Pages notice if running on GitHub Pages
+  document.addEventListener('DOMContentLoaded', function() {
+    if (window.APP_CONFIG && window.APP_CONFIG.isGitHubPages) {
+      document.getElementById('github-pages-notice').style.display = 'block';
+    }
+  });
+</script>
 
 <script src="script.js"></script>
 </body>
