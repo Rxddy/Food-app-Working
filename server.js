@@ -5,10 +5,11 @@ const bcrypt = require('bcryptjs');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
+const config = require('./config');
 
 const app = express();
 const port = process.env.PORT || 5000;
-const SECRET_KEY = process.env.SECRET_KEY || "default_secret_key"; // Fallback key
+const SECRET_KEY = config.jwtSecret; // Use JWT secret from config
 
 // CORS Configuration (Allow frontend to access API)
 const corsOptions = {
