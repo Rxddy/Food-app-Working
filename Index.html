@@ -10,61 +10,119 @@
 <body>
 <!-- Login Page -->
 <div id="login-page">
-  <h2>Login</h2>
-  <form id="login-form" onsubmit="loginUser(event)">
-    <div class="form-container">
-      <label for="username">Username</label>
+  <div class="form-container">
+    <h2>Welcome Back</h2>
+    <form id="login-form" onsubmit="loginUser(event)">
+      <label for="username">Username</label> 
       <input type="text" id="username" name="username" required>
 
       <label for="password">Password</label>
       <input type="password" id="password" name="password" required>
 
-      <button type="button" id="signup-btn">Sign Up</button>
+      <div class="remember-me">
+        <input type="checkbox" id="remember-me" name="remember-me">
+        <label for="remember-me">Remember me</label>
+      </div>
+
       <button type="submit">Login</button>
-    </div>
-  </form>
+      <button type="button" onclick="showRegistrationPage()">Create Account</button>
+    </form>
+  </div>
 </div>
 
 <!-- Registration Page -->
-<div id="registration-page" class="form-container" style="display:none;">
-  <h2>Register</h2>
+<div id="registration-page" class="form-container">
+  <h2>Create Account</h2>
   <form id="registration-form" onsubmit="event.preventDefault(); registerUser();">
-    <div class="form-container">
-      <label for="reg-username">Username</label>
-      <input type="text" id="reg-username" name="username" required>
+    <label for="reg-username">Username</label>
+    <input type="text" id="reg-username" name="username" required>
 
-      <label for="reg-password">Password</label>
-      <input type="password" id="reg-password" name="password" required>
+    <label for="reg-email">Email</label>
+    <input type="email" id="reg-email" name="email" required>
 
-      <label for="reg-email">Email</label>
-      <input type="email" id="reg-email" name="email" required>
+    <label for="reg-password">Password</label>
+    <input type="password" id="reg-password" name="password" required>
+    <div id="password-strength" class="password-strength"></div>
 
-      <button type="submit">Register</button>
-    </div>
+    <button type="submit">Register</button>
+    <button type="button" onclick="showLogin()">Back to Login</button>
   </form>
 </div>
 
 <!-- User Dashboard -->
 <div id="user-dashboard" style="display:none;">
-  <header>
-    <h1>Food Application</h1>
-    <nav>
-      <ul id="restaurant-nav">
-        <!-- Restaurants will be dynamically added here -->
-      </ul>
-    </nav>
+  <header class="main-header">
+    <div class="header-content">
+      <h1>Food Application</h1>
+      <div class="location-picker">
+        <i class="fas fa-map-marker-alt"></i>
+        <select id="delivery-time">
+          <option>Deliver now</option>
+          <option>Schedule for later</option>
+        </select>
+        <span id="selected-address-display">Select delivery address</span>
+      </div>
+      <div class="header-actions">
+        <button class="theme-toggle" onclick="toggleTheme()">
+          <i class="fas fa-moon"></i>
+        </button>
+        <button id="main-cart-btn">
+          Cart <span id="cart-count">0</span>
+        </button>
+        <div class="settings-dropdown">
+          <button id="settings-btn" type="button">
+            <i class="fas fa-cog"></i>
+          </button>
+          <div class="settings-content">
+            <button onclick="showTab('orders')">Orders</button>
+            <button onclick="showTab('addresses')">Manage Addresses</button>
+            <button id="main-logout-btn" onclick="logoutUser()">Logout</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-content">
+      <h1>Hungry? You're in the right place</h1>
+      <div class="search-container">
+        <input type="text" id="search-bar" placeholder="Search for restaurants or cuisines">
+        <button class="search-btn"><i class="fas fa-search"></i></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Filters Section -->
+  <section class="filters-section">
+    <div class="filter-chips">
+      <button class="filter-chip active">All</button>
+      <button class="filter-chip">Deals</button>
+      <button class="filter-chip">Fast Food</button>
+      <button class="filter-chip">Premium</button>
+      <button class="filter-chip">Healthy</button>
+      <button class="filter-chip">Asian</button>
+    </div>
+    <div class="sort-options">
+      <select id="sort-by">
+        <option value="recommended">Recommended</option>
+        <option value="rating">Top Rated</option>
+        <option value="delivery-time">Delivery Time</option>
+        <option value="price-low">Price: Low to High</option>
+        <option value="price-high">Price: High to Low</option>
+      </select>
+    </div>
+  </section>
 
   <!-- Tab navigation -->
   <div class="tabs">
     <button id="restaurants-tab" class="active" onclick="showTab('restaurants')">Restaurants</button>
-    <button id="addresses-tab" onclick="showTab('addresses')">Manage Addresses</button>
+    <button id="favorites-tab" onclick="showTab('favorites')">Favorites</button>
   </div>
 
   <!-- Restaurant Listings -->
   <section id="restaurants" class="tab-content active">
-    <h2>Available Restaurants</h2>
-    <input type="text" id="search-bar" placeholder="Search restaurants...">
     <div class="restaurant-list" id="restaurant-list"></div>
   </section>
 
@@ -73,14 +131,138 @@
     <h2>Manage Addresses</h2>
     <form id="address-form" onsubmit="event.preventDefault(); addAddress();">
       <div class="add-address-container">
-        <input type="text" id="address" placeholder="Enter your address" required>
+        <input type="text" id="address" placeholder="Enter your delivery address" required>
         <button id="add-address-btn" class="button-85" role="button">Add Address</button>
       </div>
       <div id="map" style="height: 300px; width: 100%;"></div>
     </form>
     <ul id="address-list"></ul>
   </section>
+
+  <!-- Orders Section -->
+  <section id="orders" class="tab-content">
+    <div class="orders-container">
+      <h2>Your Orders</h2>
+      <div class="order-filters">
+        <button class="filter-btn active" onclick="filterOrders('all')">All Orders</button>
+        <button class="filter-btn" onclick="filterOrders('active')">Active Orders</button>
+        <button class="filter-btn" onclick="filterOrders('past')">Past Orders</button>
+      </div>
+      <div id="active-orders"></div>
+      <div id="order-history"></div>
+    </div>
+  </section>
+
+  <!-- Favorites Section -->
+  <section id="favorites" class="tab-content">
+    <div class="favorites-container">
+      <h2>Your Favorite Restaurants</h2>
+      <div id="favorites-list" class="restaurant-list"></div>
+    </div>
+  </section>
+
+  <!-- Checkout Section -->
+  <div id="checkout-modal" class="checkout-modal" style="display: none;">
+    <div class="checkout-content">
+      <div class="checkout-header">
+        <h2>Checkout</h2>
+        <button onclick="closeCheckout()" class="close-checkout-btn">&times;</button>
+      </div>
+      <div class="checkout-body">
+        <div class="delivery-info">
+          <h3>Delivery Details</h3>
+          <p id="checkout-address"></p>
+          <p id="estimated-time"></p>
+        </div>
+        <div class="order-summary">
+          <h3>Order Summary</h3>
+          <div id="checkout-items"></div>
+        </div>
+        <div class="promo-code">
+          <h3>Promo Code</h3>
+          <div class="promo-input">
+            <input type="text" id="promo-code" placeholder="Enter promo code">
+            <button onclick="applyPromoCode()">Apply</button>
+          </div>
+        </div>
+        <div class="special-instructions">
+          <h3>Special Instructions</h3>
+          <textarea id="order-instructions" placeholder="Add any special instructions for your order..."></textarea>
+        </div>
+        <div class="payment-section">
+          <h3>Payment Method</h3>
+          <div class="payment-options">
+            <label class="payment-option">
+              <input type="radio" name="payment" value="card" checked>
+              Credit/Debit Card
+            </label>
+            <label class="payment-option">
+              <input type="radio" name="payment" value="cash">
+              Cash on Delivery
+            </label>
+          </div>
+          <div id="card-details">
+            <input type="text" class="card-input" placeholder="Card Number">
+            <div class="card-extra">
+              <input type="text" class="card-input small" placeholder="MM/YY">
+              <input type="text" class="card-input small" placeholder="CVV">
+            </div>
+          </div>
+        </div>
+        <button onclick="processOrder()" class="place-order-btn">Place Order</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Order Tracking Modal -->
+  <div id="tracking-modal" class="tracking-modal" style="display: none;">
+    <div class="tracking-content">
+      <div class="tracking-header">
+        <h2>Track Your Order</h2>
+        <button onclick="closeTracking()" class="close-tracking-btn">&times;</button>
+      </div>
+      <div class="tracking-body">
+        <div class="tracking-status">
+          <div class="status-steps">
+            <div class="status-step active">
+              <div class="step-icon">✓</div>
+              <div class="step-text">Order Confirmed</div>
+            </div>
+            <div class="status-step">
+              <div class="step-icon">🍳</div>
+              <div class="step-text">Preparing</div>
+            </div>
+            <div class="status-step">
+              <div class="step-icon">🚗</div>
+              <div class="step-text">On the Way</div>
+            </div>
+            <div class="status-step">
+              <div class="step-icon">📍</div>
+              <div class="step-text">Delivered</div>
+            </div>
+          </div>
+        </div>
+        <div class="delivery-details">
+          <div class="estimated-time">
+            <h3>Estimated Delivery Time</h3>
+            <p id="tracking-eta">Calculating...</p>
+          </div>
+          <div class="delivery-address">
+            <h3>Delivery Address</h3>
+            <p id="tracking-address"></p>
+          </div>
+          <div class="order-details">
+            <h3>Order Details</h3>
+            <div id="tracking-items"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
+<!-- Add Font Awesome for icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
 <footer>
   <p>&copy; 2025 Food Application</p>
