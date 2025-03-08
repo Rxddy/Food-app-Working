@@ -9,7 +9,7 @@
     "build": "echo \"No build step required for this project\" && exit 0",
     "test": "echo \"Error: no test specified\" && exit 1",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d ."
+    "deploy": "gh-pages -d . -b gh-pages"
   },
   "repository": {
     "type": "git",
