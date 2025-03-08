@@ -1,0 +1,37 @@
+{
+  "name": "food-app",
+  "version": "1.0.0",
+  "description": "A food delivery application",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "build": "echo \"No build step required for this project\" && exit 0",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d . -b gh-pages"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rxddy/Food-app-Working.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Rxddy/Food-app-Working/issues"
+  },
+  "homepage": "https://rxddy.github.io/Food-app-Working/",
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "body-parser": "^1.20.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "fs": "^0.0.1-security",
+    "jsonwebtoken": "^9.0.2"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.3.0"
+  }
+}

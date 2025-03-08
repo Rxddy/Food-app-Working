@@ -1,0 +1,2531 @@
+/* Theme Variables with improved color palette */
+:root {
+  /* Light Mode (default) */
+  --primary-bg: #f7f9fc;
+  --secondary-bg: #e4e9f2;
+  --primary-text: #2e3a59;
+  --secondary-text: #3366ff;
+  --accent-color: #00d68f;
+  --hover-color: #0043ce;
+  --card-bg: #ffffff;
+  --card-border: #edf1f7;
+  --button-bg: #3366ff;
+  --button-text: #ffffff;
+  --shadow-color: rgba(44, 51, 73, 0.1);
+  --neutral-color: #8f9bb3;
+  --danger-color: #ff3d71;
+  --success-color: #00d68f;
+  --warning-color: #ffaa00;
+  --info-color: #0095ff;
+}
+
+/* Dark Mode with better contrast */
+[data-theme="dark"] {
+  --primary-bg: #151a30;
+  --secondary-bg: #222b45;
+  --primary-text: #f7f9fc;
+  --secondary-text: #3366ff;
+  --accent-color: #00d68f;
+  --hover-color: #598bff;
+  --card-bg: #222b45;
+  --card-border: #323c5d;
+  --button-bg: #3366ff;
+  --button-text: #ffffff;
+  --shadow-color: rgba(0, 0, 0, 0.4);
+  --neutral-color: #8f9bb3;
+  --danger-color: #ff3d71;
+  --success-color: #00d68f;
+  --warning-color: #ffaa00;
+  --info-color: #0095ff;
+}
+
+/* Update background colors for dark mode */
+[data-theme="dark"] body {
+  background-color: var(--primary-bg);
+  color: var(--primary-text);
+}
+
+[data-theme="dark"] .main-header {
+  background-color: var(--card-bg);
+  border-bottom: 1px solid var(--card-border);
+}
+
+[data-theme="dark"] .restaurant-info {
+  background-color: var(--card-bg);
+}
+
+[data-theme="dark"] .rating {
+  background-color: var(--secondary-bg);
+  color: var(--primary-text);
+}
+
+[data-theme="dark"] .restaurant-meta {
+  color: var(--neutral-color);
+}
+
+[data-theme="dark"] .tag {
+  background-color: var(--secondary-bg);
+  color: var(--primary-text);
+}
+
+[data-theme="dark"] .tabs {
+  background-color: var(--card-bg);
+  border-color: var(--card-border);
+}
+
+[data-theme="dark"] .tabs button {
+  color: var(--primary-text);
+}
+
+[data-theme="dark"] .tabs button.active {
+  background-color: var(--accent-color);
+  color: var(--primary-text);
+}
+
+[data-theme="dark"] .menu-modal,
+[data-theme="dark"] .checkout-modal,
+[data-theme="dark"] .tracking-modal {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+[data-theme="dark"] .menu-content,
+[data-theme="dark"] .checkout-content,
+[data-theme="dark"] .tracking-content {
+  background-color: var(--card-bg);
+  color: var(--primary-text);
+}
+
+[data-theme="dark"] .menu-header,
+[data-theme="dark"] .checkout-header,
+[data-theme="dark"] .tracking-header {
+  background-color: var(--card-bg);
+  border-bottom-color: var(--card-border);
+}
+
+[data-theme="dark"] .close-menu-btn,
+[data-theme="dark"] .close-checkout-btn,
+[data-theme="dark"] .close-tracking-btn {
+  color: var(--primary-text);
+}
+
+[data-theme="dark"] .delivery-info,
+[data-theme="dark"] .cart-summary,
+[data-theme="dark"] #card-details {
+  background-color: var(--secondary-bg);
+  color: var(--primary-text);
+}
+
+[data-theme="dark"] input,
+[data-theme="dark"] textarea,
+[data-theme="dark"] select {
+  background-color: var(--secondary-bg);
+  color: var(--primary-text);
+  border-color: var(--card-border);
+}
+
+[data-theme="dark"] .restaurant-meta span,
+[data-theme="dark"] .delivery-fee,
+[data-theme="dark"] .restaurant-delivery {
+  color: var(--neutral-color);
+}
+
+[data-theme="dark"] .settings-content {
+  background-color: var(--card-bg);
+  border-color: var(--card-border);
+}
+
+[data-theme="dark"] .settings-content button {
+  color: var(--primary-text);
+}
+
+[data-theme="dark"] .settings-content::before {
+  border-bottom-color: var(--card-bg);
+}
+
+[data-theme="dark"] #settings-btn {
+  color: var(--primary-text);
+}
+
+[data-theme="dark"] .hero-section {
+  background-color: var(--secondary-bg);
+}
+
+[data-theme="dark"] .filter-chip {
+  background-color: var(--secondary-bg);
+  color: var(--primary-text);
+}
+
+[data-theme="dark"] .filter-chip.active {
+  background-color: var(--accent-color);
+}
+
+/* General Styles */
+body {
+  font-family: 'UberMove', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  background-color: var(--primary-bg);
+  color: var(--primary-text);
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  transition: all 0.3s ease;
+}
+
+h1, h2 {
+  color: var(--secondary-text);
+  margin: 0;
+  padding: 0;
+}
+
+/* Header and Navigation */
+.main-header {
+  background-color: var(--card-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 16px 24px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 8px var(--shadow-color);
+}
+
+.header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.location-picker {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.location-picker i {
+  color: #000000;
+}
+
+.location-picker select {
+  border: none;
+  background: transparent;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+#selected-address-display {
+  color: #000000;
+  font-weight: 500;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+#main-cart-btn {
+  background-color: #000000;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 500px;
+  border: none;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+#main-logout-btn {
+  background-color: transparent;
+  color: #000000;
+  padding: 8px 16px;
+  border: none;
+  font-weight: 500;
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+  background: none;
+  border: none;
+  color: var(--secondary-text);
+  cursor: pointer;
+  padding: 8px;
+  font-size: 20px;
+  transition: transform 0.3s ease, color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--card-bg);
+  box-shadow: 0 2px 8px var(--shadow-color);
+}
+
+.theme-toggle:hover {
+  transform: rotate(180deg);
+  color: var(--accent-color);
+}
+
+.theme-toggle i {
+  font-size: 24px;
+}
+
+/* Hero Section */
+.hero-section {
+  background-color: #f6f6f6;
+  padding: 48px 24px;
+  text-align: center;
+}
+
+.hero-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.hero-content h1 {
+  font-size: 40px;
+  margin-bottom: 24px;
+}
+
+.search-container {
+  position: relative;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.search-container input {
+  width: 100%;
+  padding: 16px 48px 16px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.search-btn {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: #000000;
+  cursor: pointer;
+}
+
+/* Filters Section */
+.filters-section {
+  padding: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.filter-chips {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+
+.filter-chip {
+  background-color: #f6f6f6;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 500px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.filter-chip.active {
+  background-color: #000000;
+  color: white;
+}
+
+.sort-options select {
+  padding: 8px 16px;
+  border: 1px solid #e2e2e2;
+  border-radius: 8px;
+  background-color: white;
+  cursor: pointer;
+}
+
+/* Restaurant List */
+.restaurant-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.restaurant {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  box-shadow: 0 4px 6px var(--shadow-color);
+  cursor: pointer;
+}
+
+.restaurant:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px var(--shadow-color);
+  border-color: var(--accent-color);
+}
+
+.restaurant img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.restaurant-info {
+  padding: 16px;
+  background: var(--card-bg);
+}
+
+.restaurant-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+
+.restaurant h3 {
+  font-size: 18px;
+  font-weight: 500;
+  margin: 0;
+}
+
+.rating {
+  background-color: #f6f6f6;
+  padding: 4px 8px;
+  border-radius: 500px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.restaurant-meta {
+  display: flex;
+  gap: 8px;
+  color: #545454;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.restaurant-tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.tag {
+  background-color: #f6f6f6;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: #545454;
+}
+
+/* Login & Registration Pages */
+#login-page {
+  display: block;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--primary-bg);
+}
+
+#registration-page {
+  display: none;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--primary-bg);
+}
+
+#user-dashboard {
+  display: none;
+}
+
+.form-container {
+  width: 90%;
+  max-width: 400px;
+  padding: 32px;
+  background: var(--card-bg);
+  border-radius: 16px;
+  box-shadow: 0 4px 12px var(--shadow-color);
+  box-sizing: border-box;
+}
+
+.form-container h2 {
+  margin-bottom: 24px;
+  font-size: 24px;
+  font-weight: 600;
+  color: #000;
+  text-align: center;
+}
+
+.form-container label {
+  display: block;
+  margin-bottom: 8px;
+  color: #333;
+  font-weight: 500;
+}
+
+.form-container input {
+  width: calc(100% - 32px);
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  border: 1px solid #e2e2e2;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.form-container input:focus {
+  border-color: #000;
+  outline: none;
+}
+
+.form-container button {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 12px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  box-sizing: border-box;
+}
+
+.form-container button[type="submit"] {
+  background-color: #000;
+  color: white;
+}
+
+.form-container button[type="submit"]:hover {
+  background-color: #333;
+}
+
+.form-container button[type="button"] {
+  background-color: #f6f6f6;
+  color: #000;
+}
+
+.form-container button[type="button"]:hover {
+  background-color: #e2e2e2;
+}
+
+.remember-me {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.remember-me input[type="checkbox"] {
+  width: auto;
+  margin: 0;
+  cursor: pointer;
+}
+
+.remember-me label {
+  margin: 0;
+  color: #666;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Registration specific styles */
+#registration-page.form-container {
+  display: none;
+}
+
+@media (max-width: 480px) {
+  .form-container {
+    margin: 20px auto;
+    padding: 24px;
+    border-radius: 12px;
+  }
+}
+
+/* Tab Navigation */
+.tabs {
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  padding: 8px;
+  border-radius: 12px;
+  display: flex;
+  gap: 8px;
+  margin: 20px auto;
+  max-width: 600px;
+}
+
+.tabs button {
+  flex: 1;
+  padding: 12px 24px;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  color: var(--primary-text);
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.tabs button.active {
+  background-color: var(--accent-color);
+  color: var(--button-text);
+}
+
+.tab-content {
+  display: none;
+  padding: 20px;
+  background-color: white;
+  border-radius: 0 0 8px 8px;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+/* Restaurant Page */
+#restaurant-page {
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+#back-to-restaurants-btn {
+  background-color: #28587B;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background-color: var(--card-bg);
+  margin-bottom: 12px;
+  height: auto;
+}
+
+.menu-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--shadow-color);
+}
+
+.menu-item-image {
+  width: 80px;
+  height: 80px;
+  min-width: 80px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.menu-item-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.menu-item-info {
+  flex: 1;
+  padding: 0 16px;
+}
+
+.menu-item-info h3 {
+  margin: 0 0 4px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--primary-text);
+}
+
+.menu-item-info .price {
+  margin: 0;
+  font-weight: 500;
+  color: var(--secondary-text);
+}
+
+.add-to-cart-btn {
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  border: none;
+  padding: 8px 16px;
+  border-radius: 500px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  white-space: nowrap;
+  min-width: 110px;
+  text-align: center;
+}
+
+.add-to-cart-btn:hover {
+  background-color: var(--hover-color);
+}
+
+/* Address Management */
+#addresses.tab-content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 24px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.add-address-container {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.add-address-container input {
+  flex: 1;
+  padding: 12px;
+  border: 1px solid #e2e2e2;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+#add-address-btn {
+  background-color: #000000;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+#map {
+  width: 100%;
+  height: 300px;
+  margin-bottom: 24px;
+  border-radius: 12px;
+  border: 1px solid #e2e2e2;
+}
+
+#address-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#address-list li {
+  background-color: white;
+  border: 1px solid #e2e2e2;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.address-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.select-address-btn {
+  background-color: #000000;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 500px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.delete-address-btn {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 500px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* Cart Modal */
+.cart-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cart-content {
+  background-color: var(--card-bg);
+  width: 90%;
+  max-width: 600px;
+  max-height: 90vh;
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  color: var(--primary-text);
+}
+
+.cart-header {
+  padding: 24px;
+  border-bottom: 1px solid #e2e2e2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cart-header h2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.close-cart-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #666;
+  cursor: pointer;
+  padding: 8px;
+}
+
+#cart-delivery-address {
+  padding: 16px 24px;
+  background-color: #f6f6f6;
+  border-bottom: 1px solid #e2e2e2;
+}
+
+#cart-list {
+  list-style: none;
+  padding: 24px;
+  margin: 0;
+  overflow-y: auto;
+  max-height: calc(90vh - 300px);
+}
+
+.empty-cart {
+  text-align: center;
+  color: #666;
+  padding: 32px;
+}
+
+.restaurant-group {
+  margin-bottom: 24px;
+}
+
+.restaurant-group h3 {
+  margin: 0 0 16px 0;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  border: 1px solid #e2e2e2;
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
+
+.remove-item-btn {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 500px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.cart-summary {
+  padding: 24px;
+  background-color: #f6f6f6;
+  border-top: 1px solid #e2e2e2;
+}
+
+.cart-summary > div {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.final-total {
+  font-weight: 600;
+  font-size: 18px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #e2e2e2;
+}
+
+.checkout-btn {
+  width: calc(100% - 48px);
+  margin: 0 24px 24px;
+  padding: 16px;
+  background-color: #000000;
+  color: white;
+  border: none;
+  border-radius: 500px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.checkout-btn:hover {
+  background-color: #333;
+}
+
+@media (max-width: 768px) {
+  .cart-content {
+    width: 100%;
+    height: 100%;
+    max-height: 100vh;
+    border-radius: 0;
+  }
+  
+  #cart-list {
+    max-height: calc(100vh - 350px);
+  }
+}
+
+/* Footer */
+footer {
+  margin-top: 50px;
+  padding: 15px;
+  background: #28587B;
+  color: white;
+  font-size: 0.9rem;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .restaurant-list {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+  
+  .tabs {
+    flex-direction: column;
+  }
+  
+  .tabs button {
+    margin: 5px 0;
+    border-radius: 5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .form-container {
+    width: 90%;
+    margin: 50px auto;
+  }
+  
+  #restaurant-page {
+    padding: 10px;
+  }
+}
+
+/* Menu Modal Styling - Non-scrollable version */
+.menu-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.menu-content {
+  background-color: var(--card-bg);
+  width: 90%;
+  max-width: 800px;
+  max-height: 90vh;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.menu-header {
+  padding: 20px;
+  border-bottom: 1px solid var(--card-border);
+  background-color: var(--card-bg);
+  position: relative;
+  z-index: 2;
+}
+
+.restaurant-menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.restaurant-rating {
+  display: flex;
+  align-items: center;
+  color: #FFD700;
+  font-weight: 600;
+}
+
+.restaurant-delivery {
+  margin-top: 8px;
+  font-size: 14px;
+  color: var(--neutral-color);
+  display: flex;
+  justify-content: space-between;
+}
+
+.delivery-fee {
+  font-weight: 500;
+}
+
+.close-menu-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: var(--primary-text);
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
+}
+
+.close-menu-btn:hover {
+  background-color: var(--secondary-bg);
+}
+
+.menu-items {
+  padding: 20px;
+  flex: 1;
+  overflow: auto;
+}
+
+.menu-items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-bottom: 20px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .menu-content {
+    width: 95%;
+    max-width: none;
+    height: 90vh;
+  }
+  
+  .menu-items-list {
+    gap: 10px;
+  }
+  
+  .menu-item {
+    padding: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .menu-content {
+    width: 100%;
+    height: 100vh;
+    border-radius: 0;
+  }
+  
+  .menu-items {
+    padding: 12px;
+  }
+  
+  .menu-item {
+    flex-direction: row;
+    align-items: center;
+  }
+  
+  .menu-item-image {
+    width: 60px;
+    height: 60px;
+    min-width: 60px;
+  }
+  
+  .add-to-cart-btn {
+    padding: 6px 12px;
+    font-size: 12px;
+    min-width: 90px;
+  }
+}
+
+/* Checkout Modal */
+.checkout-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1200;
+}
+
+.checkout-modal.active {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.checkout-content {
+  background-color: var(--card-bg);
+  width: 90%;
+  max-width: 600px;
+  max-height: 90vh;
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  color: var(--primary-text);
+}
+
+.checkout-header {
+  padding: 24px;
+  border-bottom: 1px solid #e2e2e2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.checkout-header h2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.close-checkout-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #666;
+  cursor: pointer;
+  padding: 8px;
+}
+
+.checkout-body {
+  padding: 24px;
+  overflow-y: auto;
+  max-height: calc(90vh - 80px);
+}
+
+.delivery-info {
+  background-color: #f6f6f6;
+  padding: 16px;
+  border-radius: 12px;
+  margin-bottom: 24px;
+}
+
+.delivery-info h3 {
+  margin: 0 0 12px 0;
+  font-size: 18px;
+}
+
+.delivery-info p {
+  margin: 8px 0;
+  color: #333;
+}
+
+.order-summary {
+  margin-bottom: 24px;
+}
+
+.order-summary h3 {
+  margin: 0 0 16px 0;
+  font-size: 18px;
+}
+
+.restaurant-group {
+  background-color: #f6f6f6;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.restaurant-group h4 {
+  margin: 0 0 12px 0;
+  font-size: 16px;
+}
+
+.checkout-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  color: #333;
+}
+
+.price-summary {
+  background-color: #f6f6f6;
+  padding: 16px;
+  border-radius: 12px;
+  margin-bottom: 24px;
+}
+
+.price-summary > div {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.price-summary .total {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #e2e2e2;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.payment-section {
+  margin-bottom: 24px;
+}
+
+.payment-section h3 {
+  margin: 0 0 16px 0;
+  font-size: 18px;
+}
+
+.payment-options {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.payment-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+#card-details {
+  background-color: #f6f6f6;
+  padding: 16px;
+  border-radius: 12px;
+}
+
+.card-input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #e2e2e2;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  font-size: 16px;
+}
+
+.card-extra {
+  display: flex;
+  gap: 12px;
+}
+
+.card-input.small {
+  width: calc(50% - 6px);
+  margin-bottom: 0;
+}
+
+.place-order-btn {
+  width: 100%;
+  padding: 16px;
+  background-color: #000000;
+  color: white;
+  border: none;
+  border-radius: 500px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.place-order-btn:hover {
+  background-color: #333;
+}
+
+.order-processing {
+  text-align: center;
+  padding: 48px 0;
+}
+
+.loading-spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #000000;
+  border-radius: 50%;
+  margin: 0 auto 24px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.order-success {
+  text-align: center;
+  padding: 48px 0;
+}
+
+.success-icon {
+  width: 64px;
+  height: 64px;
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  margin: 0 auto 24px;
+}
+
+.order-success h3 {
+  margin: 0 0 16px 0;
+  font-size: 24px;
+  color: #4CAF50;
+}
+
+.order-success p {
+  margin: 8px 0;
+  color: #666;
+}
+
+.done-btn {
+  margin-top: 24px;
+  padding: 12px 32px;
+  background-color: #000000;
+  color: white;
+  border: none;
+  border-radius: 500px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .checkout-content {
+    width: 100%;
+    height: 100%;
+    max-height: 100vh;
+    border-radius: 0;
+  }
+  
+  .checkout-body {
+    max-height: calc(100vh - 80px);
+  }
+  
+  .payment-options {
+    flex-direction: column;
+  }
+}
+
+/* Password Strength Indicator */
+.password-strength {
+  margin-top: 8px;
+  font-size: 12px;
+  color: #666;
+}
+
+.password-strength.weak {
+  color: #ff4d4d;
+}
+
+.password-strength.medium {
+  color: #ffa500;
+}
+
+.password-strength.strong {
+  color: #4CAF50;
+}
+
+/* Orders Section */
+.orders-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 24px;
+}
+
+.order-filters {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.filter-btn {
+    background-color: var(--secondary-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.filter-btn:hover {
+    background-color: var(--button-bg);
+    color: var(--button-text);
+}
+
+.filter-btn.active {
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    border-color: var(--button-bg);
+}
+
+.order-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 4px var(--shadow-color);
+}
+
+.order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--card-border);
+}
+
+.order-header h4 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.order-header p {
+    margin: 4px 0 0 0;
+    font-size: 14px;
+    color: var(--neutral-color);
+}
+
+.order-status {
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.order-content {
+    padding: 0 8px;
+}
+
+#active-orders h3, #order-history h3 {
+    margin: 24px 0 16px 0;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+/* Tracking Modal */
+.tracking-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1200;
+}
+
+.tracking-content {
+    background: white;
+    width: 90%;
+    max-width: 600px;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.tracking-header {
+    padding: 24px;
+    border-bottom: 1px solid #e2e2e2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.tracking-body {
+    padding: 24px;
+}
+
+.status-steps {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 32px;
+    position: relative;
+}
+
+.status-steps::before {
+    content: '';
+    position: absolute;
+    top: 24px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: #e2e2e2;
+    z-index: 1;
+}
+
+.status-step {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.step-icon {
+    width: 48px;
+    height: 48px;
+    background: white;
+    border: 2px solid #e2e2e2;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+}
+
+.status-step.active .step-icon {
+    background: #000;
+    border-color: #000;
+    color: white;
+}
+
+.step-text {
+    font-size: 14px;
+    color: #666;
+}
+
+.status-step.active .step-text {
+    color: #000;
+    font-weight: 500;
+}
+
+/* Favorites Section */
+.favorites-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px;
+}
+
+.favorite-btn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: white;
+    border: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    z-index: 10;
+}
+
+.favorite-btn i {
+    color: #ccc;
+    font-size: 18px;
+    transition: color 0.2s ease;
+}
+
+.favorite-btn:hover {
+    transform: scale(1.1);
+}
+
+.favorite-btn.active i {
+    color: #ff3d71;
+}
+
+/* Promo Code Section */
+.promo-code {
+    margin-bottom: 24px;
+}
+
+.promo-input {
+    display: flex;
+    gap: 12px;
+}
+
+.promo-input input {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid #e2e2e2;
+    border-radius: 8px;
+}
+
+.promo-input button {
+    padding: 12px 24px;
+    background: #000;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/* Special Instructions */
+.special-instructions textarea {
+    width: 100%;
+    height: 100px;
+    padding: 12px;
+    border: 1px solid #e2e2e2;
+    border-radius: 8px;
+    resize: vertical;
+    margin-bottom: 24px;
+}
+
+/* Restaurant Reviews */
+.restaurant-reviews {
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid #e2e2e2;
+}
+
+.review-card {
+    background: white;
+    border: 1px solid #e2e2e2;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 16px;
+}
+
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.reviewer-name {
+    font-weight: 500;
+}
+
+.review-rating {
+    color: #ffc107;
+}
+
+.review-date {
+    font-size: 14px;
+    color: #666;
+}
+
+.review-content {
+    color: #333;
+    line-height: 1.5;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .status-steps {
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    .status-steps::before {
+        width: 2px;
+        height: 100%;
+        left: 24px;
+        top: 0;
+    }
+
+    .status-step {
+        flex-direction: row;
+        gap: 16px;
+    }
+
+    .tracking-content {
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+    }
+
+    .promo-input {
+        flex-direction: column;
+    }
+}
+
+/* Settings Dropdown */
+.settings-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+#settings-btn {
+  background: transparent;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  font-size: 20px;
+  color: #000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+#settings-btn:hover {
+  transform: rotate(45deg);
+}
+
+.settings-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background-color: var(--card-bg);
+  min-width: 200px;
+  box-shadow: 0 4px 12px var(--shadow-color);
+  border-radius: 8px;
+  padding: 8px 0;
+  z-index: 1100;
+  margin-top: 8px;
+}
+
+.settings-content button {
+  display: block;
+  width: 100%;
+  padding: 12px 16px;
+  text-align: left;
+  background: transparent;
+  border: none;
+  color: var(--primary-text);
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s ease;
+}
+
+.settings-content button:hover {
+  background-color: var(--accent-color);
+  color: var(--button-text);
+}
+
+/* Add a small arrow at the top of the dropdown */
+.settings-content::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  right: 12px;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid var(--card-bg);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease-in;
+}
+
+/* Card Styles Enhancement */
+.restaurant, .order-card, .menu-content, .checkout-content {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  box-shadow: 0 4px 12px var(--shadow-color);
+  transition: all 0.3s ease;
+}
+
+.restaurant:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px var(--shadow-color);
+  border-color: var(--accent-color);
+}
+
+/* Button Styles Enhancement */
+button {
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px var(--shadow-color);
+}
+
+/* Header Enhancement */
+.main-header {
+  background-color: var(--card-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* Input Fields Enhancement */
+input, textarea, select {
+  background-color: var(--card-bg);
+  color: var(--primary-text);
+  border: 1px solid var(--card-border);
+  transition: all 0.3s ease;
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 2px var(--accent-color);
+  outline: none;
+}
+
+/* Modal Enhancement */
+.menu-modal, .checkout-modal, .tracking-modal {
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+/* Tabs Enhancement */
+.tabs {
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  padding: 8px;
+  border-radius: 12px;
+  display: flex;
+  gap: 8px;
+  margin: 20px auto;
+  max-width: 600px;
+}
+
+.tabs button {
+  flex: 1;
+  padding: 12px 24px;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  color: var(--primary-text);
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.tabs button.active {
+  background-color: var(--accent-color);
+  color: var(--button-text);
+}
+
+/* Settings Dropdown Enhancement */
+.settings-content {
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.settings-content button:hover {
+  background-color: var(--accent-color);
+  color: var(--button-text);
+}
+
+.alert-success .alert-icon {
+  color: var(--success-color);
+}
+
+.alert-warning {
+  background-color: rgba(255, 170, 0, 0.1);
+  border-color: var(--warning-color);
+}
+
+.alert-warning .alert-icon {
+  color: var(--warning-color);
+}
+
+.alert-danger {
+  background-color: rgba(255, 61, 113, 0.1);
+  border-color: var(--danger-color);
+}
+
+.alert-danger .alert-icon {
+  color: var(--danger-color);
+}
+
+.alert-info {
+  background-color: rgba(0, 149, 255, 0.1);
+  border-color: var(--info-color);
+}
+
+.alert-info .alert-icon {
+  color: var(--info-color);
+}
+
+/* Toast Notifications */
+.toast-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.toast {
+  background-color: var(--card-bg);
+  color: var(--primary-text);
+  padding: 12px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  animation: toastSlideIn 0.3s ease forwards;
+  max-width: 300px;
+}
+
+.toast.fade-out {
+  opacity: 0;
+  transform: translateX(100%);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+@keyframes toastSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* No results message */
+.no-results {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--neutral-color);
+  font-size: 16px;
+  background-color: var(--card-bg);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px var(--shadow-color);
+}
+
+/* Cart modal */
+.cart-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.cart-content {
+  background-color: var(--card-bg);
+  width: 90%;
+  max-width: 600px;
+  max-height: 90vh;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.cart-header {
+  padding: 20px;
+  border-bottom: 1px solid var(--card-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cart-header h2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.close-cart-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: var(--primary-text);
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
+}
+
+.close-cart-btn:hover {
+  background-color: var(--secondary-bg);
+}
+
+#cart-delivery-address {
+  padding: 16px 20px;
+  background-color: var(--secondary-bg);
+  color: var(--primary-text);
+  font-size: 14px;
+}
+
+#cart-list {
+  padding: 20px;
+  overflow-y: auto;
+  max-height: calc(90vh - 300px);
+}
+
+.empty-cart {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--neutral-color);
+  font-size: 16px;
+}
+
+.restaurant-group {
+  margin-bottom: 20px;
+  background-color: var(--card-bg);
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--card-border);
+}
+
+.restaurant-group h3 {
+  margin: 0;
+  padding: 16px;
+  font-size: 18px;
+  font-weight: 600;
+  background-color: var(--secondary-bg);
+  color: var(--primary-text);
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  border-bottom: 1px solid var(--card-border);
+}
+
+.cart-item:last-child {
+  border-bottom: none;
+}
+
+.cart-item h4 {
+  margin: 0 0 4px 0;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.cart-item p {
+  margin: 0;
+  color: var(--secondary-text);
+  font-weight: 500;
+}
+
+.remove-item-btn {
+  background-color: var(--danger-color);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 500px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.remove-item-btn:hover {
+  background-color: #ff1a53;
+  transform: scale(1.05);
+}
+
+.cart-summary {
+  padding: 20px;
+  background-color: var(--secondary-bg);
+  border-top: 1px solid var(--card-border);
+}
+
+.cart-summary > div {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  color: var(--primary-text);
+}
+
+.final-total {
+  font-weight: 600;
+  font-size: 18px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--card-border);
+}
+
+.checkout-btn {
+  width: calc(100% - 40px);
+  margin: 20px;
+  padding: 16px;
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  border: none;
+  border-radius: 500px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.checkout-btn:hover {
+  background-color: var(--hover-color);
+  transform: translateY(-2px);
+}
+
+/* Dark mode adjustments */
+[data-theme="dark"] .favorite-btn {
+  background-color: #2e3a59;
+}
+
+[data-theme="dark"] .favorite-btn i {
+  color: #666;
+}
+
+[data-theme="dark"] .favorite-btn.active i {
+  color: #ff3d71;
+}
+
+[data-theme="dark"] .toast {
+  background-color: #2e3a59;
+  color: white;
+}
+
+[data-theme="dark"] .cart-item h4 {
+  color: white;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .cart-content {
+    width: 95%;
+    height: 90vh;
+  }
+  
+  .checkout-btn {
+    width: calc(100% - 32px);
+    margin: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .cart-content {
+    width: 100%;
+    height: 100vh;
+    border-radius: 0;
+  }
+  
+  .cart-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .remove-item-btn {
+    margin-top: 12px;
+    width: 100%;
+  }
+  
+  .favorite-btn {
+    top: 8px;
+    right: 8px;
+    width: 32px;
+    height: 32px;
+  }
+}
+
+[data-theme="dark"] .restaurant-list {
+  background-color: var(--primary-bg);
+}
+
+[data-theme="dark"] .restaurant {
+  background-color: var(--card-bg);
+  border-color: var(--card-border);
+}
+
+[data-theme="dark"] .restaurant h3 {
+  color: var(--primary-text);
+}
+
+[data-theme="dark"] .restaurant-group {
+  background-color: var(--card-bg);
+  border-color: var(--card-border);
+}
+
+[data-theme="dark"] .restaurant-group h3 {
+  background-color: var(--secondary-bg);
+  color: var(--primary-text);
+}
+
+[data-theme="dark"] .tab-content {
+  background-color: var(--primary-bg);
+}
+
+[data-theme="dark"] .empty-cart {
+  background-color: var(--card-bg);
+  color: var(--primary-text);
+}
+
+[data-theme="dark"] .location-picker {
+  color: var(--primary-text);
+}
+
+[data-theme="dark"] .location-picker select {
+  background-color: var(--secondary-bg);
+  color: var(--primary-text);
+  border-color: var(--card-border);
+}
+
+[data-theme="dark"] .search-btn {
+  background-color: var(--button-bg);
+  color: var(--button-text);
+}
+
+[data-theme="dark"] .sort-options select {
+  background-color: var(--secondary-bg);
+  color: var(--primary-text);
+  border-color: var(--card-border);
+}
+
+/* Dark mode styles for checkout */
+[data-theme="dark"] .checkout-modal {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+[data-theme="dark"] .checkout-content {
+  background-color: var(--card-bg);
+  color: var(--primary-text);
+  border-color: var(--card-border);
+}
+
+[data-theme="dark"] .checkout-header {
+  background-color: var(--secondary-bg);
+  border-bottom-color: var(--card-border);
+}
+
+[data-theme="dark"] .checkout-header h2 {
+  color: var(--primary-text);
+}
+
+[data-theme="dark"] .close-checkout-btn {
+  color: var(--primary-text);
+  background-color: transparent;
+}
+
+[data-theme="dark"] .checkout-item {
+  border-bottom-color: var(--card-border);
+  color: var(--primary-text);
+}
+
+[data-theme="dark"] .special-instructions textarea {
+  background-color: var(--secondary-bg);
+  color: var(--primary-text);
+  border-color: var(--card-border);
+}
+
+[data-theme="dark"] .payment-option {
+  color: var(--primary-text);
+}
+
+[data-theme="dark"] .card-input {
+  background-color: var(--secondary-bg);
+  color: var(--primary-text);
+  border-color: var(--card-border);
+}
+
+[data-theme="dark"] .place-order-btn {
+  background-color: var(--button-bg);
+  color: var(--button-text);
+}
+
+[data-theme="dark"] .place-order-btn:hover {
+  background-color: var(--hover-color);
+}
+
+[data-theme="dark"] .order-success {
+  background-color: var(--card-bg);
+  color: var(--primary-text);
+}
+
+[data-theme="dark"] .success-icon {
+  background-color: var(--success-color);
+  color: var(--button-text);
+}
+
+[data-theme="dark"] .done-btn {
+  background-color: var(--button-bg);
+  color: var(--button-text);
+}
+
+[data-theme="dark"] .done-btn:hover {
+  background-color: var(--hover-color);
+}
+
+[data-theme="dark"] .promo-input input {
+  background-color: var(--secondary-bg);
+  color: var(--primary-text);
+  border-color: var(--card-border);
+}
+
+[data-theme="dark"] .promo-input button {
+  background-color: var(--button-bg);
+  color: var(--button-text);
+}
+
+[data-theme="dark"] .promo-input button:hover {
+  background-color: var(--hover-color);
+}
+
+[data-theme="dark"] .price-summary {
+  background-color: var(--secondary-bg);
+  color: var(--primary-text);
+  border: 1px solid var(--card-border);
+}
+
+[data-theme="dark"] .price-summary > div {
+  color: var(--primary-text);
+}
+
+[data-theme="dark"] .price-summary .total {
+  border-top-color: var(--card-border);
+  color: var(--primary-text);
+}
+
+[data-theme="dark"] .checkout-item span {
+  color: var(--primary-text);
+}
+
+[data-theme="dark"] .restaurant-group h4 {
+  color: var(--primary-text);
+}
+
+[data-theme="dark"] .order-summary h3 {
+  color: var(--primary-text);
+}
+
+[data-theme="dark"] .checkout-items {
+  background-color: var(--card-bg);
+  color: var(--primary-text);
+}
+
+/* Fix for the restaurant group in checkout */
+[data-theme="dark"] #checkout-items .restaurant-group {
+  background-color: var(--card-bg);
+  border-color: var(--card-border);
+}
+
+/* Ensure all text in checkout is visible */
+[data-theme="dark"] .checkout-body {
+  color: var(--primary-text);
+}
+
+[data-theme="dark"] .checkout-body h3 {
+  color: var(--primary-text);
+}
+
+/* Fix for the delivery info section */
+[data-theme="dark"] .delivery-info p {
+  color: var(--primary-text);
+}
+
+/* Dark mode styles for address management */
+[data-theme="dark"] #address-list li {
+  background-color: var(--card-bg);
+  border-color: var(--card-border);
+  color: var(--primary-text);
+}
+
+[data-theme="dark"] .add-address-container input {
+  background-color: var(--secondary-bg);
+  border-color: var(--card-border);
+  color: var(--primary-text);
+}
+
+[data-theme="dark"] #add-address-btn {
+  background-color: var(--button-bg);
+  color: var(--button-text);
+}
+
+[data-theme="dark"] #addresses h2 {
+  color: var(--primary-text);
+}
+
+[data-theme="dark"] .select-address-btn {
+  background-color: var(--button-bg);
+  color: var(--button-text);
+}
+
+[data-theme="dark"] .delete-address-btn {
+  background-color: var(--danger-color);
+  color: var(--button-text);
+}
+
+[data-theme="dark"] #selected-address-display {
+  color: var(--primary-text);
+}
+
+[data-theme="dark"] #checkout-address {
+  color: var(--primary-text);
+}
+
+[data-theme="dark"] #tracking-address {
+  color: var(--primary-text);
+}
+
+[data-theme="dark"] #map {
+  border-color: var(--card-border);
+  background-color: var(--secondary-bg);
+}
+
+/* Style for Google Maps in dark mode */
+[data-theme="dark"] .gm-style {
+  background-color: var(--secondary-bg);
+}
+
+/* Order items styling */
+.order-items-container {
+  margin-bottom: 16px;
+}
+
+.order-restaurant {
+  margin-bottom: 16px;
+}
+
+.order-restaurant h4 {
+  margin: 0 0 8px 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.order-items {
+  padding-left: 16px;
+}
+
+.order-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.order-details {
+  border-top: 1px solid var(--card-border);
+  padding-top: 12px;
+}
+
+.order-total, .order-address {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.order-total {
+  font-weight: 600;
+}
+
+/* Status colors */
+.status-confirmed {
+  color: var(--info-color);
+}
+
+.status-preparing {
+  color: var(--warning-color);
+}
+
+.status-delivering {
+  color: var(--accent-color);
+}
+
+.status-delivered {
+  color: var(--success-color);
+}
+
+.status-cancelled {
+  color: var(--danger-color);
+}
+
+/* Dark mode styles for orders */
+[data-theme="dark"] .order-card {
+  background-color: var(--card-bg);
+  border-color: var(--card-border);
+  color: var(--primary-text);
+}
+
+[data-theme="dark"] .order-header h4 {
+  color: var(--primary-text);
+}
+
+[data-theme="dark"] .order-restaurant h4 {
+  color: var(--primary-text);
+}
+
+[data-theme="dark"] .order-details {
+  border-top-color: var(--card-border);
+}
+
+[data-theme="dark"] .filter-btn {
+  background-color: var(--secondary-bg);
+  color: var(--primary-text);
+  border-color: var(--card-border);
+}
+
+[data-theme="dark"] .filter-btn.active {
+  background-color: var(--button-bg);
+  color: var(--button-text);
+}
+
+
